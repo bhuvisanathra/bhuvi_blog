@@ -3,6 +3,7 @@
 // TextField Standard
 // Styled is to Style the component
 // Typography p tag replecment
+import { useState } from 'react';
 import { Box, TextField, Button, styled, Typography } from '@mui/material';
 
 //Outer Container
@@ -53,30 +54,41 @@ const OrText = styled(Typography)`
 `
 
 //Main Component
-const login = () => {
+const Login = () => {
+
+    const [account, setAccount] = useState('login');
+
+    //Signup Toogle 
+    const toogleSignUp = () => {
+        account === 'signup' ? setAccount('login') : setAccount('signup');
+    }
+
     return (
         <Component>
             <Box>
                 <Image src="/images/BhuviBlogsT.png" alt='App Icon' />
-                {/* For Login <Wrapper>
-                    <TextField variant="standard" label="Enter Username" />
-                    <TextField variant="standard" label="Enter Password" />
-                    <LoginButton variant="contained">Login</LoginButton>
-                    <OrText style={{ textAlign: 'center' }}>OR</OrText>
-                    <SignUpButton>Create an Account</SignUpButton>
-                </Wrapper> */}
-
-                <Wrapper>
-                    <TextField variant="standard" label="Enter Name" />
-                    <TextField variant="standard" label="Enter Username" />
-                    <TextField variant="standard" label="Enter Password" />
-                    <LoginButton variant="contained">Sign Up</LoginButton>
-                    <OrText style={{ textAlign: 'center' }}>OR</OrText>
-                    <SignUpButton>Already have an Account?</SignUpButton>
-                </Wrapper>
+                {
+                    account === 'login' ? (
+                        <Wrapper>
+                            <TextField variant="standard" label="Enter Username" />
+                            <TextField variant="standard" label="Enter Password" />
+                            <LoginButton variant="contained" >Login</LoginButton>
+                            <OrText style={{ textAlign: 'center' }}>OR</OrText>
+                            <SignUpButton onClick={() => toogleSignUp()}>Create an Account</SignUpButton>
+                        </Wrapper>
+                    ) : (
+                        <Wrapper>
+                            <TextField variant="standard" label="Enter Name" />
+                            <TextField variant="standard" label="Enter Username" />
+                            <TextField variant="standard" label="Enter Password" />
+                            <LoginButton variant="contained">Sign Up</LoginButton>
+                            <OrText style={{ textAlign: 'center' }}>OR</OrText>
+                            <SignUpButton onClick={() => toogleSignUp()}>Already have an Account?</SignUpButton>
+                        </Wrapper>
+                    )
+                }
             </Box>
         </Component >
     )
 }
-
-export default login;
+export default Login;
