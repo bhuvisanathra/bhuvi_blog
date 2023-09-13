@@ -53,14 +53,31 @@ const OrText = styled(Typography)`
     font-size:16px;
 `
 
+// signup Intial Values Object
+const signUpInitialValues = {
+    name: '',
+    username: '',
+    password: ''
+}
+
+
 //Main Component
 const Login = () => {
 
     const [account, setAccount] = useState('login');
+    const [signup, setSignup] = useState(signUpInitialValues);
 
     //Signup Toogle 
     const toogleSignUp = () => {
         account === 'signup' ? setAccount('login') : setAccount('signup');
+    }
+
+    // When Text is Added in Registration Form
+    // e Stands for Event
+    // e.target.value from this we will get the value inserted
+    // e.target.name from this we will get the name of the Input Field
+    const onInputChange = (e) => {
+        console.log(e.target.name + " : " + e.target.value);
     }
 
     return (
@@ -78,9 +95,9 @@ const Login = () => {
                         </Wrapper>
                     ) : (
                         <Wrapper>
-                            <TextField variant="standard" label="Enter Name" />
-                            <TextField variant="standard" label="Enter Username" />
-                            <TextField variant="standard" label="Enter Password" />
+                            <TextField type="text" variant="standard" name="name" label="Enter Name" onChange={(e) => onInputChange(e)} />
+                            <TextField type="text" variant="standard" name="username" label="Enter Username" onChange={(e) => onInputChange(e)} />
+                            <TextField type="password" variant="standard" name="password" label="Enter Password" onChange={(e) => onInputChange(e)} />
                             <LoginButton variant="contained">Sign Up</LoginButton>
                             <OrText style={{ textAlign: 'center' }}>OR</OrText>
                             <SignUpButton onClick={() => toogleSignUp()}>Already have an Account?</SignUpButton>
